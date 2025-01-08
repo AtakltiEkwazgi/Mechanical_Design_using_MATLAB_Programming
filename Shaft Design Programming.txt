@@ -1,0 +1,59 @@
+clear all
+clc
+close all
+P=input('enter motor power to the terbune in watt:');
+
+while P<0
+if P<0
+disp('this is undefined,since it is negetive')
+    
+P=input('enter positive motor power to the terbune in watt')
+end
+end
+N=input('enter motor speed in rpm:');
+
+while N<0
+if N<0
+    disp('this is undefined,since it is negetive')
+N=input('enter positive speed')
+q=input('enter shaft shear angle in degree per meter:')
+end
+end
+q=input('enter angular deflection')
+while q<0
+ if q<0
+    disp('this is undefined,since it is negetive')
+    q=input('enter positive input shear angle')
+end
+end
+
+L=input('enter shaft length in m:')
+while L<0
+    if L<0
+disp('this is undefined,since it is negetive')
+    
+L=input('enter positive input shaft length')
+ 
+end   
+end
+%modules of elastisty the material in N/m^2
+G=80000000000;
+%torque of the shaft in Nm
+T=(P*60)/(2*pi*N);
+% angular deflection 
+Z=(q*pi/180)
+%outer diameter of hollow shaft in m
+D=((32*L*T)/(pi*G*Z*0.8704))^(1/4);
+%internal diameter of the hollow shaft
+d=0.6*D;
+%volume of hollow shaft in m^3
+Vh=0.25*pi*L*(D^2-d^2);
+%shear stress of shaft
+S=(G*D*q*pi)/(2*L*180);
+%diameter of solid shaft
+D1=((16*T*L)/(S*pi))^(1/3)
+%volume of solid shaft in m^3
+Vs=0.25*pi*D1^2*L;
+%saved material when we use hollow shaft instead of solid shaft in m^3
+V=Vs-Vh;
+
